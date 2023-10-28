@@ -1,0 +1,36 @@
+GET http://localhost:3003/api/blogs
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+	"author": "Bruce Wayne",
+	"url": "https://batman.fandom.com/wiki/Batman",
+	"title": "Batman",
+	"likes": 199
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+	"author": "Bruce Wayne",
+	"url": "https://batman.fandom.com/wiki/The_Joker",
+	"title": "The Joker",
+	"likes": 203
+}
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+	"author": "Test",
+	"url": "https://test.com",
+	"title": "Test"
+}
+
+###
+DELETE http://localhost:3003/api/blogs/3
