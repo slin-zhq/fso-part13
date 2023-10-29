@@ -104,15 +104,6 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3003/api/login
-Content-Type: application/json
-
-{
-	"username": "batman@jl.com",
-	"password": "batman"
-}
-
-###
 # "batman" creating a new blog
 POST http://localhost:3003/api/blogs
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbkBqbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4NTc0NzIzfQ.jCCaTVELt2El0FS2TTtV7zTglBNHt2-QGAedOiyt9IA
@@ -192,3 +183,16 @@ Content-Type: application/json
 {
 	"markedAsRead": true
 }
+
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+	"username": "batman@jl.com",
+	"password": "batman"
+}
+
+###
+DELETE http://localhost:3003/api/logout
+Authorization: Bear ereyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbkBqbC5jb20iLCJpZCI6MSwic2Vzc2lvbklkIjoyLCJpYXQiOjE2OTg1OTM5NTJ9.mC4SjLf-1KAjODepLZNrXs-m-k5UXleV5hgiHnsNpdU

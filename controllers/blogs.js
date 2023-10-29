@@ -1,9 +1,8 @@
 const router = require('express').Router()
-const jwt = require('jsonwebtoken')
 const { Op } = require('sequelize')
 
-const { Blog, User } = require('../models')
-const { SECRET } = require('../util/config')
+const { tokenExtractor } = require('../util/middleware')
+const { Blog, User, ActiveSession } = require('../models')
 
 router.get('/', async (req, res) => {
 	let where = {}
@@ -39,24 +38,6 @@ router.get('/', async (req, res) => {
 	res.json(blogs)
 })
 
-const tokenExtractor = (req, res, next) => {
-  const authorization = req.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    try {
-      console.log(authorization.substring(7))
-      console.log(SECRET)
-      req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
-    } catch (error) {
-      console.log(error)
-      return res.status(401).json({ error: 'token invalid' })
-    }
-  } else {
-    return res.status(401).json({ error: 'token missing' })
-  }
-
-  next()
-}
-
 router.post('/', tokenExtractor, async (req, res, next) => {
 	// try {
 	// 	const user = await User.findByPk(req.decodedToken.id)
@@ -65,7 +46,11 @@ router.post('/', tokenExtractor, async (req, res, next) => {
 	// } catch(error) {
 	// 	return res.status(400).json({ error })
 	// }
-
+	const activeSession = await ActiveSession.findByPk(req.decodedToken.sessionId)
+	if (!activeSession) {
+		return res.status(401).json({ error: 'Your token has expired. Log in and try again.' })
+	}
+	
 	const user = await User.findByPk(req.decodedToken.id)
 	const blog = await Blog.create({ ...req.body, userId: user.id, })
 	res.json(blog)
@@ -85,6 +70,11 @@ router.get('/:id', blogFinder, async (req, res) => {
 })
 
 router.delete('/:id', tokenExtractor, blogFinder, async (req, res) => {
+	const activeSession = await ActiveSession.findByPk(req.decodedToken.sessionId)
+	if (!activeSession) {
+		return res.status(401).json({ error: 'Your token has expired. Log in and try again.' })
+	}
+
 	if (req.blog) {
 		if (req.decodedToken.id === req.blog.userId) {
 			await req.blog.destroy()

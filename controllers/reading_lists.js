@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 const { tokenExtractor } = require('../util/middleware')
-const { ReadingList } = require('../models')
+const { ReadingList, ActiveSession } = require('../models')
 
 router.get('/', async (req, res) => {
 	const readingLists = await ReadingList.findAll({})
@@ -14,6 +14,11 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', tokenExtractor, async (req, res) => {
+	const activeSession = await ActiveSession.findByPk(req.decodedToken.sessionId)
+	if (!activeSession) {
+		return res.status(401).json({ error: 'Your token has expired. Log in and try again.' })
+	}
+
 	const readingListItem = await ReadingList.findByPk(req.params.id)
 	if (readingListItem) {
 		if (req.decodedToken.id === readingListItem.userId) {
