@@ -156,3 +156,39 @@ GET http://localhost:3003/api/blogs
 
 ###
 GET http://localhost:3003/api/authors
+
+###
+GET http://localhost:3003/api/readinglists
+
+###
+POST http://localhost:3003/api/readinglists
+Content-Type: application/json
+
+{
+	"blogId": 5,
+	"userId": 2,
+	"markedAsRead": true
+}
+
+###
+GET http://localhost:3003/api/users/2?read=false
+
+###
+# "batman" marking a blog in his own reading list as read
+PUT http://localhost:3003/api/readinglists/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbkBqbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4NTg5MTY5fQ.RYgXxrRWOSmnbI8lBaThkl7l__7OZS1iuR64HV0Ocfw
+Content-Type: application/json
+
+{
+	"markedAsRead": true
+}
+
+###
+# "batman" marking a blog in "superman"'s reading list as read
+PUT http://localhost:3003/api/readinglists/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbkBqbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4NTg5MTY5fQ.RYgXxrRWOSmnbI8lBaThkl7l__7OZS1iuR64HV0Ocfw
+Content-Type: application/json
+
+{
+	"markedAsRead": true
+}
