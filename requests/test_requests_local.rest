@@ -57,22 +57,25 @@ Content-Type: application/json
 GET http://localhost:3003/api/users
 
 ###
+# Creating username "batman"
 POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-	"username": "batman",
+	"username": "batman@jl.com",
 	"name": "Bruce Wayne"
 }
 
 ###
+# Creating username "superman"
 POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-	"username": "kal-el",
+	"username": "superman@jl.com",
 	"name": "Clark Kent"
 }
+
 
 ###
 PUT http://localhost:3003/api/users/kal-el
@@ -105,19 +108,21 @@ POST http://localhost:3003/api/login
 Content-Type: application/json
 
 {
-	"username": "batman",
+	"username": "batman@jl.com",
 	"password": "batman"
 }
 
 ###
+# "batman" creating a new blog
 POST http://localhost:3003/api/blogs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbiIsImlkIjoxLCJpYXQiOjE2OTg1NjAwNzR9.jOGj8zKbKb67fc30kLqsXjOIhj_neSwyQ3BpRnBHHvc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbkBqbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4NTc0NzIzfQ.jCCaTVELt2El0FS2TTtV7zTglBNHt2-QGAedOiyt9IA
 Content-Type: application/json
 
 {
 	"author": "Test",
 	"url": "https://test.com",
-	"title": "Test"
+	"title": "Test 5",
+	"year": 1995
 }
 
 ###

@@ -17,7 +17,7 @@ const errorHandler = (error, req, res, next) => {
 	if (error.name === "SequelizeValidationError") {
 		if (error.errors[0].message === "Validation isEmail on username failed") {
 			errorInResponse = {
-				error: `'username' must be a valid email address. "${error.errors[0].value} is not."`
+				error: `username must be a valid email address. '${error.errors[0].value}' is not.`
 			}
 		}
 	}
