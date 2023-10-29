@@ -129,3 +129,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1c
 # Valid deletion: "batman" tries to delete a blog created by "batman"
 DELETE http://localhost:3003/api/blogs/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhdG1hbiIsImlkIjoxLCJpYXQiOjE2OTg1NjAwNzR9.jOGj8zKbKb67fc30kLqsXjOIhj_neSwyQ3BpRnBHHvc
+
+###
+# User "superman" adds new blogs
+POST http://localhost:3003/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVybWFuIiwiaWQiOjIsImlhdCI6MTY5ODU1OTgzMX0.QdlHbCZEAJMn0mF7h7sXa365nkux2szx91GOgtG0xks
+Content-Type: application/json
+
+{
+	"author": "Test",
+	"url": "https://test.com",
+	"title": "测试 7",
+	"likes": 5
+}
+
+###
+GET http://localhost:3003/api/blogs?search=test
+
+###
+GET http://localhost:3003/api/blogs
+
+###
+GET http://localhost:3003/api/authors
